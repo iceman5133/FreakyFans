@@ -3,33 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Creator Dashboard – FreakyFans</title>
+  <title>Dashboard – FreakyFans</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
 </head>
 <body>
   <nav class="top-nav">
     <a href="index.html">Home</a>
-    <a href="feed.html">Feed</a>
     <a href="dashboard.html" class="active">Dashboard</a>
-    <a href="upload-image.html">Upload</a>
+    <a href="upload-image.html">Upload Image</a>
+    <a href="upload-video.html">Upload Video</a>
     <a href="go-live.html">Go Live</a>
+    <a href="#" id="logout-link" style="float: right; color: red;">Logout</a>
   </nav>
 
   <header class="simple-header">
-    <h1>🎛️ Creator Dashboard</h1>
-    <p class="tagline">Manage your freaky content like a pro.</p>
+    <h1>👑 Your Dashboard</h1>
+    <p class="tagline">Welcome back, boss. Time to run FreakyFans your way.</p>
   </header>
 
   <section class="dashboard-links">
     <a href="upload-image.html" class="btn blue">📸 Upload Image</a>
     <a href="upload-video.html" class="btn blue">🎥 Upload Video</a>
     <a href="go-live.html" class="btn blue">📡 Go Live</a>
-    <a href="creator-pricing.html" class="btn blue">💰 Set Pricing</a>
-    <a href="media-manager.html" class="btn blue">🗂 Media Manager</a>
+    <a href="media-manager.html" class="btn blue">🗂 Manage Media</a>
+    <a href="profile.html" class="btn blue">👤 Edit Profile</a>
   </section>
 
   <footer>
-    <p>© 2025 FreakyFans. Your hustle. Your rules.</p>
+    <p>© 2025 FreakyFans. Stay freaky, stay in control.</p>
   </footer>
+
+  <script>
+    const supabase = supabase.createClient(
+      'https://jztqizjnuywbwqdposkb.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6dHFpempudXl3YndxZHBvc2tiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5MjQ5NzAsImV4cCI6MjA2MDUwMDk3MH0.iqZm8qX_7uipj0hMmuTDjxnvmN1apEW_lbYsDgWIvu0'
+    );
+
+    // Check for login
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!user) {
+        window.location.href = "auth.html";
+      }
+    });
+
+    // Logout link
+    document.getElementById('logout-link').addEventListener('click', async (e) => {
+      e.preventDefault();
+      await supabase.auth.signOut();
+      window.location.href = "auth.html";
+    });
+  </script>
 </body>
 </html>
+
