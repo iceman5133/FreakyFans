@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freaky Shorts – FreakyFans</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .shorts-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .short-video {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .short-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html">Home</a>
+    <a href="feed.html">Feed</a>
+    <a href="shorts.html" class="active">Shorts</a>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+
+  <header class="simple-header">
+    <h1>🎞 Freaky Shorts</h1>
+    <p class="tagline">Scroll to get teased. Tap to get more.</p>
+  </header>
+
+  <section class="shorts-container">
+    <div class="short-video">
+      <video autoplay loop muted playsinline>
+        <source src="https://cdn.videvo.net/videvo_files/video/free/2022-08/large_watermarked/220712_Woman_Dancing_03_preview.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="short-video">
+      <video autoplay loop muted playsinline>
+        <source src="https://cdn.videvo.net/videvo_files/video/free/2022-08/large_watermarked/220712_Woman_Dancing_02_preview.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 FreakyFans. Swipe your heart out.</p>
+  </footer>
+</body>
+</html>
+

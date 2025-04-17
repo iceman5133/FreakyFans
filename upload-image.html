@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Image – FreakyFans</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="upload-video.html">Upload Video</a>
+    <a href="go-live.html">Go Live</a>
+  </nav>
+
+  <header class="simple-header">
+    <h1>📸 Upload Image</h1>
+    <p class="tagline">Share a hot pic with your fans or lock it for VIPs only.</p>
+  </header>
+
+  <section class="form-section">
+    <form id="upload-form" class="live-form">
+      <label>Title:
+        <input type="text" id="title" placeholder="My peachy look" required />
+      </label>
+
+      <label>Access:
+        <select id="access">
+          <option value="free">Free</option>
+          <option value="locked">Locked</option>
+        </select>
+      </label>
+
+      <label>Select Image:
+        <input type="file" id="file-input" accept="image/*" required />
+      </label>
+
+      <button type="submit" class="btn blue">Upload Now</button>
+      <p id="upload-status"></p>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 FreakyFans. Upload it, flaunt it.</p>
+  </footer>
+
+  <script>
+    const supabase = supabase.createClient(
+      'https://YOUR_PROJECT_ID.supabase.co',
+      'YOUR_PUBLIC_ANON_KEY'
+    );
+
+    document.getElementById('upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fileInput = document.getElementById('file-input');
+      const title = document.getElementById('title').value;
+      const access = document.getElementById('access').value;
+      const file = fileInput.files[0];
+      const status = document.getElementById('upload-status');
+
+      if (!file) {
+        status.textContent = "Please select a file.";
+        return;
+      }
+
+      const filePath = `${access}/${Date.now()}-${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('creator-content')
+        .upload(filePath, file);
+
+      if (error) {
+        status.textContent = "❌ Upload failed: " + error.message;
+      } else {
+        status.textContent = "✅ Upload successful!";
+        console.log("Image uploaded to:", data.path);
+      }
+    });
+  </script>
+</body>
+</html>
+
+

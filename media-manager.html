@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media Manager – FreakyFans</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="upload-image.html">Upload Image</a>
+    <a href="upload-video.html">Upload Video</a>
+    <a href="media-manager.html" class="active">Media Manager</a>
+  </nav>
+
+  <header class="simple-header">
+    <h1>🗂 My Media</h1>
+    <p class="tagline">View, manage, or delete your uploads.</p>
+  </header>
+
+  <section class="gallery-grid">
+    <!-- Replace with dynamic content from Supabase if desired -->
+    <img src="https://images.unsplash.com/photo-1598300055910-e6e8acb2baad?auto=format&fit=crop&w=800&q=80" alt="Uploaded Pic 1">
+    <img src="https://images.unsplash.com/photo-1589927986089-35812388d1fc?auto=format&fit=crop&w=800&q=80" alt="Uploaded Pic 2">
+    <video controls>
+      <source src="https://cdn.videvo.net/videvo_files/video/free/2022-08/large_watermarked/220712_Woman_Dancing_03_preview.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video controls>
+      <source src="https://cdn.videvo.net/videvo_files/video/free/2022-08/large_watermarked/220712_Woman_Dancing_02_preview.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <footer>
+    <p>© 2025 FreakyFans. All your heat in one place.</p>
+  </footer>
+</body>
+</html>

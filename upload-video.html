@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Video – FreakyFans</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="upload-image.html">Upload Image</a>
+    <a href="go-live.html">Go Live</a>
+  </nav>
+
+  <header class="simple-header">
+    <h1>🎥 Upload Video</h1>
+    <p class="tagline">Post a hot clip for fans to unlock and tip.</p>
+  </header>
+
+  <section class="form-section">
+    <form id="video-upload-form" class="live-form">
+      <label>Video Title:
+        <input type="text" id="video-title" placeholder="Back it up 👀" required />
+      </label>
+
+      <label>Access Level:
+        <select id="video-access">
+          <option value="free">Free</option>
+          <option value="locked">Locked</option>
+        </select>
+      </label>
+
+      <label>Select Video File:
+        <input type="file" id="video-file" accept="video/*" required />
+      </label>
+
+      <button type="submit" class="btn blue">Upload Video</button>
+      <p id="video-upload-status"></p>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 FreakyFans. Lights, camera, upload.</p>
+  </footer>
+
+  <script>
+    const supabase = supabase.createClient(
+      'https://YOUR_PROJECT_ID.supabase.co',
+      'YOUR_PUBLIC_ANON_KEY'
+    );
+
+    document.getElementById('video-upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('video-title').value;
+      const access = document.getElementById('video-access').value;
+      const file = document.getElementById('video-file').files[0];
+      const status = document.getElementById('video-upload-status');
+
+      if (!file) {
+        status.textContent = "Please select a video file.";
+        return;
+      }
+
+      const filePath = `${access}/${Date.now()}-${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('creator-content')
+        .upload(filePath, file);
+
+      if (error) {
+        status.textContent = "❌ Upload failed: " + error.message;
+      } else {
+        status.textContent = "✅ Video uploaded successfully!";
+        console.log("Video uploaded to:", data.path);
+      }
+    });
+  </script>
+</body>
+</html>
+
